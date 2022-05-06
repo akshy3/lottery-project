@@ -9,7 +9,7 @@ def getResults(name,serial):
     url = BASE_URL+name+'-results'
 
     try:
-        with open(name+"-"+serial+".json") as file:
+        with open("data/"+name+"-"+serial+".json") as file:
             data = file.read()
             return data
     except:
@@ -28,7 +28,7 @@ def getResults(name,serial):
         for i,row in tickets.iteritems():
             tickets[i]=row.replace("Ending With:","")
         data_json = tickets.to_json()
-        tickets.to_json(name+"-"+serial +".json")
+        tickets.to_json("data/"+name+"-"+serial +".json")
         return data_json
 
 
