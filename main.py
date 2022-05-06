@@ -7,8 +7,7 @@ app = FastAPI()
 
 LOTTERY = ["win-win","karunya"]
 
-# with open("lotteries.json") as file:
-#     data = json.load(file)
+
 
 
 @app.get("/")
