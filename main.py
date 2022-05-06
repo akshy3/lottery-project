@@ -5,7 +5,7 @@ from fastapi import FastAPI
 import utils
 app = FastAPI()
 
-LOTTERY = ["win-win","karunya"]
+LOTTERY = ["win-win","karunya","akshaya","sthree-sakthi","karunya-plus","nirmal-lottery","bhagyamithra-lottery"]
 
 @app.get("/")
 def index():
