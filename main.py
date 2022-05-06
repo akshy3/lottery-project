@@ -1,17 +1,27 @@
 
 
 from fastapi import FastAPI
-import json
+# import json
+import utils
 app = FastAPI()
 
-with open("lotteries.json") as file:
-    data = json.load(file)
+LOTTERY = ["win-win","karunya"]
+
+# with open("lotteries.json") as file:
+#     data = json.load(file)
+
+
 @app.get("/")
-def read_root():
+def index():
+    return LOTTERY
+
+
+@app.get("/{name}/{serial}")
+def getResults(name: str, serial: str):
+    if name not in LOTTERY:
+        return {"error": "Invalid lottery name"}
+    serial = serial.upper()
+    data = utils.getResults(name,serial)
     return data
 
-
-# @app.get("/items/{item_id}")
-# def read_item(item_id: int, q: Optional[str] = None):
-#     return {"item_id": item_id, "q": q}
 

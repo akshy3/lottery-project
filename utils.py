@@ -2,16 +2,33 @@
 import pandas as pd
 
 
-url = 'https://www.lotto.in/kerala-state-lotteries/win-win-results'
-serial = 'W-666'
+BASE_URL = 'https://www.lotto.in/kerala-state-lotteries/'
 
-df = pd.read_html(url, match = serial)
-table = df[0]
-table.columns = table.columns.str.replace('Ticket Numbers','tickets')
-table.columns = table.columns.str.replace('Prize Amount','prize')
-tickets = table['tickets']
 
-for i,row in tickets.iteritems():
-    tickets[i]=row.replace("Ending With:","")
+def getResults(name,serial):
+    url = BASE_URL+name+'-results'
 
-print(tickets)
+    try:
+        with open(name+"-"+serial+".json") as file:
+            data = file.read()
+            return data
+    except:
+
+        try:
+            df = pd.read_html(url, match = serial)
+        except:
+            return {"error": "Invalid serial"}
+
+        
+        table = df[0]
+        table.columns = table.columns.str.replace('Ticket Numbers','tickets')
+        table.columns = table.columns.str.replace('Prize Amount','prize')
+        tickets = table['tickets']
+
+        for i,row in tickets.iteritems():
+            tickets[i]=row.replace("Ending With:","")
+        data_json = tickets.to_json()
+        tickets.to_json(name+"-"+serial +".json")
+        return data_json
+
+
