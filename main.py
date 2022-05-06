@@ -7,9 +7,6 @@ app = FastAPI()
 
 LOTTERY = ["win-win","karunya"]
 
-
-
-
 @app.get("/")
 def index():
     return LOTTERY
