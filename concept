@@ -1,0 +1,13 @@
+api concept of lottery project
+
+basic implementation has :
+
+/lotteries => returns the available lotteries. example {"weekly": ["win-win","karunya"]}
+
+/lotteries/<name> => returns the results. example 
+{
+"name": "karunya",
+"result": {
+		"first": []
+	  }
+}
